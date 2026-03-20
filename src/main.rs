@@ -37,27 +37,21 @@ impl Clock {
         }
     }
     pub fn substract_minutes(&self, minutes: i32) -> Self {
-        //todo!("Add {minutes} minutes to existing Clock time");
-        //self.add_minutes(- minutes)
         let mut clock: Clock = Clock { hours: self.hours, minutes: self.minutes };
         if minutes > 0 {
             clock.minutes -= minutes;
-            //println!("substract1 {}", clock);
             if clock.minutes < 0 {
                 // if minutes are in [-60;0[, hour is -1, if minutes are in [-120;-60[, hour is -2, etc
                 clock.hours -= 1 + (- clock.minutes) / 60;
-                //println!("substract2 {}", clock);
                 clock.minutes = 60 - (- clock.minutes) % 60;
                 if clock.minutes == 60 {
                     clock.minutes = 0;
                     clock.hours += 1;
                 }
-                //println!("substract3 {}", clock);
             }
             if clock.hours < 0 {
                 // if hours are in [-INF;0[, hours is 24 - hours % 24
                 clock.hours = 24 - (- clock.hours) % 24;
-                //println!("substract4 {}", clock);
             }
             clock
         } else {
