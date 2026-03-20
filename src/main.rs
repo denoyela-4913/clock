@@ -9,11 +9,11 @@ impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
         //todo!("Construct a new Clock from {hours} hours and {minutes} minutes");
             let mut clock: Clock = Clock { hours, minutes };
-            clock.hours = clock.hours % 24;
+            clock.hours %= 24;
             clock.minutes += clock.hours * 60;
-            clock.minutes = clock.minutes % (24 * 60);
+            clock.minutes %= 24 * 60;
             clock.hours = clock.minutes / 60;
-            clock.minutes = clock.minutes % 60;
+            clock.minutes %= 60;
             clock
     }
 
@@ -23,8 +23,8 @@ impl Clock {
         if minutes > 0 {
             clock.minutes += minutes;
             clock.hours += clock.minutes / 60;
-            clock.minutes = clock.minutes % 60;
-            clock.hours = clock.hours % 24;
+            clock.minutes %= 60;
+            clock.hours %= 24;
             clock
         } else {
             self.substract_minutes(- minutes)
