@@ -10,8 +10,14 @@ impl Clock {
         //todo!("Construct a new Clock from {hours} hours and {minutes} minutes");
             let mut clock: Clock = Clock { hours, minutes };
             clock.hours %= 24;
+            if clock.hours <0 {
+                clock.hours += 24;
+            }
             clock.minutes += clock.hours * 60;
             clock.minutes %= 24 * 60;
+            if clock.minutes <0 {
+                clock.minutes += 24 * 60;
+            }
             clock.hours = clock.minutes / 60;
             clock.minutes %= 60;
             clock
@@ -91,6 +97,13 @@ fn main() {
     c = c.substract_minutes(1022);
     println!("Clock: {}", c);
     let mut c = Clock::new(0, 21);
+    println!("Clock: {}", c);
+    c = c.add_minutes(150);
+    println!("Clock: {}", c);
+    //c = c.add_minutes(-150);
+    c = c.substract_minutes(150);
+    println!("Clock: {}", c);
+    let mut c = Clock::new(-2, -20);
     println!("Clock: {}", c);
     c = c.add_minutes(150);
     println!("Clock: {}", c);
